@@ -7,18 +7,18 @@
 	import fl.transitions.TweenEvent;
 	import fl.transitions.easing.*;
 	import flashx.textLayout.formats.Float;
+	import com.greensock.TweenMax;
 	
 	public class MembersDosiersMenu extends MovieClip 
 	{
 		public var membersDosiers:MembersDosiers;
-
-		private var hideNextTween, showNextTween, hidePrevTween, showPrevTween:Tween;
 		
 		private const dosiersCount:int = 9;
 		private const buttonsAnimationSpeed:Number = 0.8;
 		
 		public function MembersDosiersMenu() 
 		{
+			prevDosierButton.alpha = 0;
 			prevDosierButton.addEventListener(MouseEvent.CLICK, showPrevDosier);
 			nextDosierButton.addEventListener(MouseEvent.CLICK, showNextDosier);
 		}
@@ -29,20 +29,12 @@
 			
 			if ((currentDosierIndex + 1) == dosiersCount)
 			{
-				if (showNextTween != null)
-					showNextTween.stop();
-				nextDosierButton.removeEventListener(MouseEvent.CLICK, showNextDosier);
-				hideNextTween = new Tween(nextDosierButton, "alpha", Strong.easeOut, nextDosierButton.alpha, 0, buttonsAnimationSpeed, true);
-				hideNextTween.addEventListener(TweenEvent.MOTION_FINISH, hideNextTweenCompleted);
+				TweenMax.to(nextDosierButton, buttonsAnimationSpeed, {alpha:0});
 			}
 			
 			if (currentDosierIndex == 1)
 			{
-				if (hidePrevTween != null)
-					hidePrevTween.stop();
-				prevDosierButton.addEventListener(MouseEvent.CLICK, showPrevDosier);
-				showPrevTween = new Tween(prevDosierButton, "alpha", Strong.easeOut, prevDosierButton.alpha, 1, buttonsAnimationSpeed, true);
-				showPrevTween.addEventListener(TweenEvent.MOTION_FINISH, showPrevTweenCompleted);
+				TweenMax.to(prevDosierButton, buttonsAnimationSpeed, {alpha:1});
 			}
 			
 			membersDosiers.showNextMemberDosier();
@@ -54,43 +46,15 @@
 			
 			if (currentDosierIndex == dosiersCount)
 			{
-				if (hideNextTween != null)
-					hideNextTween.stop();
-				nextDosierButton.addEventListener(MouseEvent.CLICK, showNextDosier);
-				showNextTween = new Tween(nextDosierButton, "alpha", Strong.easeOut, nextDosierButton.alpha, 1, buttonsAnimationSpeed, true);
-				showNextTween.addEventListener(TweenEvent.MOTION_FINISH, showNextTweenCompleted);
+				TweenMax.to(nextDosierButton, buttonsAnimationSpeed, {alpha:1});
 			}
 			
 			if (currentDosierIndex == 2)
 			{
-				if (showPrevTween != null)
-					showPrevTween.stop();
-				prevDosierButton.removeEventListener(MouseEvent.CLICK, showPrevDosier);
-				hidePrevTween = new Tween(prevDosierButton, "alpha", Strong.easeOut, prevDosierButton.alpha, 0, buttonsAnimationSpeed, true);
-				hidePrevTween.addEventListener(TweenEvent.MOTION_FINISH, hidePrevTweenCompleted);
+				TweenMax.to(prevDosierButton, buttonsAnimationSpeed, {alpha:0});
 			}
 			
 			membersDosiers.showPrevMemberDosier();
-		}
-		
-		private function showNextTweenCompleted (e:TweenEvent)
-		{
-			showNextTween = null;
-		}
-		
-		private function hideNextTweenCompleted (e:TweenEvent)
-		{
-			hideNextTween = null;
-		}
-		
-		private function showPrevTweenCompleted (e:TweenEvent)
-		{
-			showPrevTween = null;
-		}
-		
-		private function hidePrevTweenCompleted (e:TweenEvent)
-		{
-			hidePrevTween = null;
 		}
 	}
 }
