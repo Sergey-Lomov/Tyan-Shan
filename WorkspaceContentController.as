@@ -7,9 +7,15 @@
 	
 	public class WorkspaceContentController extends MovieClip 
 	{
+		public function WorkspaceContentController ()
+		{
+			introduction.workspaceContentController = this;
+		}
+		
 		public function showIntroduction() 
 		{
-			this.gotoAndStop(1);
+			this.gotoAndStop("Introduction");
+			introduction.workspaceContentController = this;
 		}
 		
 		public function showMemberDosier(dosierName:String) 
@@ -17,7 +23,12 @@
 			this.gotoAndStop("Dosiers");
 			membersDosiers.showMemberDosier(dosierName);
 		}
-
+		
+		public function showAdventureAtFrame(frameName:String) 
+		{
+			this.gotoAndStop("Adventure");
+			adventure.gotoAndStop(frameName);
+		}
 	}
 	
 }
