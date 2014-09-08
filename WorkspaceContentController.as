@@ -27,7 +27,7 @@
 		public function showAdventureAtFrame(frameName:String) 
 		{
 			this.gotoAndStop("Adventure");
-			adventure.gotoAndStop(frameName);
+			adventure.showAdventureAtFrame(frameName);
 		}
 	}
 	
