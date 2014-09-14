@@ -25,7 +25,7 @@
 		
 		private function showNextDosier (e:Event)
 		{
-			var currentDosierIndex:int = membersDosiers.currentDosierIndex();
+			var currentDosierIndex:int = membersDosiers.currentFrame;
 			
 			if ((currentDosierIndex + 1) == dosiersCount)
 			{
@@ -37,12 +37,12 @@
 				TweenMax.to(prevDosierButton, buttonsAnimationSpeed, {alpha:1});
 			}
 			
-			membersDosiers.showNextMemberDosier();
+			membersDosiers.nextFrame();
 		}
 		
 		private function showPrevDosier (e:Event)
 		{
-			var currentDosierIndex:int = membersDosiers.currentDosierIndex();
+			var currentDosierIndex:int = membersDosiers.currentFrame;
 			
 			if (currentDosierIndex == dosiersCount)
 			{
@@ -54,7 +54,7 @@
 				TweenMax.to(prevDosierButton, buttonsAnimationSpeed, {alpha:0});
 			}
 			
-			membersDosiers.showPrevMemberDosier();
+			membersDosiers.prevFrame();
 		}
 	}
 }

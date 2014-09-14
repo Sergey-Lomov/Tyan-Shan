@@ -8,18 +8,8 @@
 	{
 		public function HistoryWorkspaceController () 
 		{
-			workspaceBottomMenu.membersDosiersButton.addEventListener(MouseEvent.CLICK, handleMembersDosiersClick);
-			workspaceBottomMenu.introductionButton.addEventListener(MouseEvent.CLICK, handleIntroductionClick);
-		}
-		
-		private function handleMembersDosiersClick(e:Event)
-		{
-			this.showMemberDosier("Tretjak");
-		}
-		
-		private function handleIntroductionClick(e:Event)
-		{
-			this.showIntroduction();
+			workspaceBottomMenu.workspaceContent = workspaceContent;
+			workspaceContent.workspaceBottomMenu = workspaceBottomMenu;
 		}
 
 		private function hideSelf() 
@@ -34,12 +24,32 @@
 		
 		public function showIntroduction() 
 		{
-			WorkspaceContentController(this.getChildByName("workspaceContent")).showIntroduction();
+			workspaceContent.showIntroduction();
 		}
 		
 		public function showMemberDosier(dosierName:String)
 		{
 			workspaceContent.showMemberDosier(dosierName);
 		}
+		
+	/*	public function handleEnteringLastPage
+		{
+			workspaceBottomMenu.hideNextPageButton();
+		}
+		
+		public function handleLeavingLastPage
+		{
+			workspaceBottomMenu.showPrevPageButton();
+		}
+		
+		public function handleEnteringFirstPage
+		{
+			workspaceBottomMenu.hidePrevPageButton();
+		}
+		
+		public function handleLeavingFirstPage
+		{
+			workspaceBottomMenu.showNextPageButton():
+		}*/
 	}
 }

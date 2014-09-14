@@ -5,7 +5,7 @@
 	
 	public class MembersDosiers extends MovieClip {
 		
-		public function MembersDosiers() {
+		/*public function MembersDosiers() {
 			memebersDosiersMenu.membersDosiers = this;
 		}
 		
@@ -27,6 +27,6 @@
 		public function currentDosierIndex():int
 		{
 			return membesrDosiersContent.currentFrame;
-		}
+		}*/
 	}
 }
