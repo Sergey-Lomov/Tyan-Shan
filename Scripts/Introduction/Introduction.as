@@ -5,7 +5,7 @@
 	
 	public class Introduction extends MovieClip
 	{		
-		public var workspaceContentController:WorkspaceContentController;
+		public var workspaceContent:WorkspaceContentController;
 	
 		public function Introduction() 
 		{
@@ -15,12 +15,12 @@
 		
 		private function showMemebersDosiers(e:MouseEvent)
 		{
-			workspaceContentController.showMemberDosier("Tretjak");
+			workspaceContent.showMembersDosiers();
 		}
 		
 		private function showAdventure(e:MouseEvent)
 		{
-			workspaceContentController.showAdventureAtFrame("Content");
+			workspaceContent.showAdventure();
 		}
 	}
 	
