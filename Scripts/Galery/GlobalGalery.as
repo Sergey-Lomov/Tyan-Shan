@@ -204,6 +204,25 @@
 			var scaleXTween:Tween = new Tween(this, "scaleX", Strong.easeOut, 0, this.scaleX, 1, true);
 			var scaleYTween:Tween = new Tween(this, "scaleY", Strong.easeOut, 0, this.scaleY, 1, true);
 			scaleYTween.addEventListener(TweenEvent.MOTION_FINISH, presentationComplete);
+			
+			if (this.picturesPaths.length < 2)
+			{
+				if((getChildByName("globalNextButton") != null)
+				   && (getChildByName("globalPreviousButton") != null))
+				{
+					this.removeChild(nextButton);
+					this.removeChild(previousButton);
+				}
+			}
+			else
+			{
+				if((getChildByName("sglobalNextButton") == null)
+				   && (getChildByName("globalPreviousButton") == null))
+				{
+					this.addChild(nextButton);
+					this.addChild(previousButton);
+				}
+			}
 		}
 		
 		private function presentationComplete (e:Event)
