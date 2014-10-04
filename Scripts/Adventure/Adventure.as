@@ -12,6 +12,8 @@
 			import flash.events.MouseEvent;
 
 			DayMinus2Link.addEventListener(MouseEvent.CLICK, showFrameRelatedToCaller);
+			DayMinus1Link.addEventListener(MouseEvent.CLICK, showFrameRelatedToCaller);
+			Day0Link.addEventListener(MouseEvent.CLICK, showFrameRelatedToCaller);
 		}
 		
 		function showFrameRelatedToCaller (e:MouseEvent)
