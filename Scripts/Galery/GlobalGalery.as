@@ -13,6 +13,7 @@
 	import flash.geom.ColorTransform;
 	import fl.transitions.TweenEvent;
 	import flash.display.Loader;
+	import flash.display.DisplayObject;
 
 	public class GlobalGalery extends PicturesGalery 
 	{
@@ -89,6 +90,15 @@
 			var scaleXTween:Tween = new Tween(this, "scaleX", Strong.easeOut, this.scaleX, 0, 1, true);
 			var scaleYTween:Tween = new Tween(this, "scaleY", Strong.easeOut, this.scaleY, 0, 1, true);
 			scaleYTween.addEventListener(TweenEvent.MOTION_FINISH, removeSelfFromStage);
+		}
+		
+		public function addReferenceWithClass (referenceClass:Class, point:Point)
+		{
+			var referenceObject:Object = new referenceClass();
+			var reference:DisplayObject = referenceObject as DisplayObject;
+			reference.x = point.x;
+			reference.y = point.y;
+			this.addChild(reference);
 		}
 		
 		private function removeSelfFromStage (e:Event)
