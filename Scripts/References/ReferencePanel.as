@@ -33,7 +33,7 @@
 			var scaleYTween:Tween = new Tween(this, "scaleY", Strong.easeOut, 0, this.scaleY, 1, true);
 		}
 		
-		private function closeSelf (e:Event)
+		public function closeSelf (e:Event)
 		{
 			var scaleXTween:Tween = new Tween(this, "scaleX", Strong.easeOut, this.scaleX, 0, 1, true);
 			var scaleYTween:Tween = new Tween(this, "scaleY", Strong.easeOut, this.scaleY, 0, 1, true);
