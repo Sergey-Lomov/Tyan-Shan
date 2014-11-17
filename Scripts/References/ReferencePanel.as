@@ -2,13 +2,16 @@
 	
 	import flash.display.MovieClip;
 	import flash.events.Event;	
-	import fl.transitions.Tween;
-	import fl.transitions.TweenEvent;
-	import fl.transitions.easing.*;
 	import flash.events.MouseEvent;
+	
+	import com.greensock.TweenMax;
+	import com.greensock.easing.*;
 	
 	public class ReferencePanel extends MovieClip {
 		
+		private const animationDuration:Number = 0.7;
+		private const fullWidth:Number = 800;
+		private const fullHeight:Number = 600;
 		
 		public function ReferencePanel()
 		{
@@ -28,22 +31,24 @@
 		{
 			this.x = stage.stageWidth / 2;
 			this.y = stage.stageHeight / 2;
+			this.width = 0;
+			this.height = 0;
 
-			var scaleXTween:Tween = new Tween(this, "scaleX", Strong.easeOut, 0, this.scaleX, 1, true);
-			var scaleYTween:Tween = new Tween(this, "scaleY", Strong.easeOut, 0, this.scaleY, 1, true);
+			TweenMax.to(this, animationDuration, {width : fullWidth});
+			TweenMax.to(this, animationDuration, {height : fullHeight});
 		}
 		
 		public function closeSelf (e:Event)
 		{
-			var scaleXTween:Tween = new Tween(this, "scaleX", Strong.easeOut, this.scaleX, 0, 1, true);
-			var scaleYTween:Tween = new Tween(this, "scaleY", Strong.easeOut, this.scaleY, 0, 1, true);
+			TweenMax.killTweensOf(this);
 			
-			scaleYTween.addEventListener(TweenEvent.MOTION_FINISH, removeSelfFromParent);
-		}
-		
-		private function removeSelfFromParent (e:Event)
-		{
-			this.parent.removeChild(this);
+			TweenMax.to(this, animationDuration, {width : 0});
+			TweenMax.to(this, animationDuration, {height : 0, onCompleteParams:[this], onComplete:
+				function (self:ReferencePanel):void
+				{
+					self.parent.removeChild(self);
+				}});
+	
 		}
 	}
 }

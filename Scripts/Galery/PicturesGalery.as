@@ -7,12 +7,12 @@
 	import flash.display.Loader;
 	import flash.filesystem.*;
 	import flash.events.Event;
-	import fl.transitions.Tween;
-	import fl.transitions.easing.*;
-	import fl.transitions.TweenEvent;
-	import flash.events.MouseEvent;
 	import flash.geom.Rectangle;
 	import flash.text.TextField;
+	import flash.events.MouseEvent;
+	
+	import com.greensock.TweenMax;
+	import com.greensock.easing.*;
 
 
 	public class PicturesGalery extends MovieClip 
@@ -37,11 +37,8 @@
 		
 		// Following vars should be specified in sublass constructor defore call parent (this class) constructor
 		protected var loadingIndicator, picturesContainer:MovieClip = null;
-		protected var nextButton, previousButton:SimpleButton = null;
+		protected var nextButton, previousButton:MovieClip = null;
 		protected var titleField:TextField = null;
-		
-		protected var pictureShowTween:Tween = null;
-		protected var pictureHideTween:Tween = null;
 		
 		public function PicturesGalery() 
 		{
@@ -166,10 +163,10 @@
 			if (activePictureIndex != -1)
 			{
 				previousPictureIndex = activePictureIndex;
-				pictureHideTween = new Tween(loaders[activePictureIndex], "alpha", Strong.easeOut, 1, 0, picturesAnimationSpeed, true);
+				TweenMax.to(loaders[previousPictureIndex], picturesAnimationSpeed, {alpha : 0});
 			}
 			
-			pictureShowTween = new Tween(loaders[index], "alpha", Strong.easeOut, 0, 1, picturesAnimationSpeed, true);
+			TweenMax.fromTo(loaders[index], picturesAnimationSpeed, {alpha : 0}, {alpha : 1});
 			
 			activePictureIndex = index;
 			
@@ -185,12 +182,12 @@
 		
 		protected function showLoadingUI ()
 		{
-			var loadingIndicatorTween:Tween = new Tween(loadingIndicator, "alpha", Strong.easeOut, loadingIndicator.alpha, 1, uiAnimationSpeed, true);
+			TweenMax.to(loadingIndicator, uiAnimationSpeed, {alpha : 1});
 		}
 		
 		protected function showRegularUI ()
 		{
-			var loadingIndicatorTween:Tween = new Tween(loadingIndicator, "alpha", Strong.easeOut, loadingIndicator.alpha, 0, uiAnimationSpeed, true);
+			TweenMax.to(loadingIndicator, uiAnimationSpeed, {alpha : 0});
 		}
 		
 		private function showNextPicture (e:Event)
