@@ -24,6 +24,7 @@
 			this.gotoAndStop("Introduction");
 			currentSection = introduction;
 			introduction.workspaceContent = this;
+			this.updateButtons();
 		}
 		
 		public function showMembersDosiers()
@@ -36,6 +37,7 @@
 			this.gotoAndStop("Dosiers");
 			currentSection = membersDosiers;
 			membersDosiers.gotoAndStop(dosierName);
+			this.updateButtons();
 		}
 		
 		public function showAdventure() 
@@ -48,6 +50,7 @@
 			this.gotoAndStop("Adventure");
 			currentSection = adventure;
 			adventure.gotoAndStop(frameName);
+			this.updateButtons();
 		}
 		
 		public function showConclusions ()
@@ -65,6 +68,7 @@
 			this.gotoAndStop("Content");
 			currentSection = contentPage;
 			contentPage.workspaceContent = this;
+			this.updateButtons();
 		}
 		
 		public function showMap ()
@@ -74,9 +78,6 @@
 		
 		public function showNextPage()
 		{
-			if (currentFrame == 1 && currentSection.framesLoaded == 1)
-				workspaceBottomMenu.showPrevPageButton();
-			
 			if (currentSection.currentFrame < currentSection.totalFrames)
 				currentSection.nextFrame();
 			else
@@ -90,15 +91,11 @@
 				}
 			}
 			
-			if (currentFrame == totalFrames && currentSection.currentFrame == currentSection.totalFrames)
-				workspaceBottomMenu.hideNextPageButton();
+			this.updateButtons();
 		}
 		
 		public function showPrevPage()
-		{
-			if (currentFrame == totalFrames && currentSection.currentFrame == currentSection.totalFrames)
-				workspaceBottomMenu.showNextPageButton();
-			
+		{			
 			if (currentSection.currentFrame > 1)
 				currentSection.prevFrame();
 			else
@@ -111,9 +108,21 @@
 					currentSection.gotoAndStop(currentSection.totalFrames);
 				}
 			}
-			
-			if (this.currentFrame == 1 && currentSection.currentFrame == 1)
+
+			this.updateButtons();
+		}
+		
+		public function updateButtons ()
+		{
+			if (currentFrame == 1 && currentSection.currentFrame == 1)
 				workspaceBottomMenu.hidePrevPageButton();
+			else
+				workspaceBottomMenu.showPrevPageButton();
+			
+			if (currentFrame == totalFrames && currentSection.currentFrame == currentSection.totalFrames)
+				workspaceBottomMenu.hideNextPageButton();
+			else
+				workspaceBottomMenu.showNextPageButton();
 		}
 		
 		public function initCurrentSection ()

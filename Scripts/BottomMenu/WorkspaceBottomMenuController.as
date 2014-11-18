@@ -21,21 +21,25 @@
 
 		public function hideNextPageButton ()
 		{
+			//TweenMax.killTweensOf(nextPageButton);
 			TweenMax.to(nextPageButton, buttonsAnimationSpeed, {alpha : 0});
 		}
 		
 		public function hidePrevPageButton ()
 		{
+			//TweenMax.killTweensOf(prevPageButton);
 			TweenMax.to(prevPageButton, buttonsAnimationSpeed, {alpha : 0});
 		}
 
 		public function showNextPageButton ()
 		{
+			//TweenMax.killTweensOf(nextPageButton);
 			TweenMax.to(nextPageButton, buttonsAnimationSpeed, {alpha : 1});
 		}
 		
 		public function showPrevPageButton ()
 		{
+			//TweenMax.killTweensOf(prevPageButton);
 			TweenMax.to(prevPageButton, buttonsAnimationSpeed, {alpha : 1});
 		}
 
