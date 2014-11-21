@@ -7,6 +7,8 @@
 	
 	public class WorkspaceContentController extends MovieClip 
 	{
+		public var historyWorkspace:HistoryWorkspaceController;
+		
 		public var workspaceBottomMenu:WorkspaceBottomMenuController;
 		
 		private var currentSection:MovieClip;
@@ -73,7 +75,7 @@
 		
 		public function showMap ()
 		{
-			
+			historyWorkspace.showMap();
 		}
 		
 		public function showNextPage()

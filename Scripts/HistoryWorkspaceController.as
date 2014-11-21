@@ -3,13 +3,28 @@
 	import flash.display.MovieClip;
 	import flash.events.MouseEvent;
 	import flash.events.Event;
+	import com.greensock.*;
 
 	public class HistoryWorkspaceController extends MovieClip 
 	{
+		const mapShowingDuration:Number = 1.0;
+		
 		public function HistoryWorkspaceController () 
 		{
 			workspaceBottomMenu.workspaceContent = workspaceContent;
 			workspaceContent.workspaceBottomMenu = workspaceBottomMenu;
+			workspaceContent.historyWorkspace = this;
+		}
+
+		public function showMap ()
+		{
+			var finishY:Number = -(this.height * this.scaleY);
+			TweenMax.to(this, mapShowingDuration, {y : finishY, onCompleteParams:[this], onComplete:
+							function (self:HistoryWorkspaceController):void
+							{
+								self.parent.removeChild(self);
+								InteractiveMap.sharedMap.isActive = true;
+							}});
 		}
 
 		private function hideSelf() 
@@ -31,25 +46,5 @@
 		{
 			workspaceContent.showMemberDosier(dosierName);
 		}
-		
-	/*	public function handleEnteringLastPage
-		{
-			workspaceBottomMenu.hideNextPageButton();
-		}
-		
-		public function handleLeavingLastPage
-		{
-			workspaceBottomMenu.showPrevPageButton();
-		}
-		
-		public function handleEnteringFirstPage
-		{
-			workspaceBottomMenu.hidePrevPageButton();
-		}
-		
-		public function handleLeavingFirstPage
-		{
-			workspaceBottomMenu.showNextPageButton():
-		}*/
 	}
 }
