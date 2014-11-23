@@ -7,6 +7,7 @@
 	import flash.display.DisplayObject;
 	import flash.display.Shape;
 	import flash.geom.ColorTransform;
+	import flash.display.DisplayObjectContainer;
 	
 	public class TrackDay extends MovieClip {
 
@@ -15,18 +16,42 @@
 		protected var highlightedColor:Color;
 		protected var stateChangingDuration:Number = 1.0;
 
-		private var active:Boolean = false;
-
+		public var active:Boolean = false;
+		public var lastUpdatedState:Boolean = !active;
+	
+		private var track:MainTrack = null;
+		
 		public function TrackDay() {
+			var currParent:DisplayObjectContainer = this.parent;
+			while (track != null
+				   && !(track is MainTrack))
+				   {
+					   currParent = currParent.parent;
+				   }
+			if (currParent != null)
+				track = MainTrack(currParent);
+
 			this.addEventListener(MouseEvent.CLICK, changeState);
 		}
-		
+			
 		private function changeState (e:MouseEvent) {
-			active = !active;
-			this.updateState(true);
+			if (active) {
+				active = !active;
+				this.updateState(true);
+			}
+			else {
+				track.deactivateAllDays();
+				active = !active;
+			}
+			track.updateAllDaysAnimated();
 		}
 		
-		protected function updateState (animated:Boolean) {
+		public function updateState (animated:Boolean) {
+			if (active == lastUpdatedState)
+				return;
+			
+			lastUpdatedState = active;
+			
 			var colorTransform:ColorTransform = new ColorTransform();
 			var color:uint = defaultColor.redMultiplier  << 16 | defaultColor.greenMultiplier  << 8 | defaultColor.blueMultiplier;
 			
