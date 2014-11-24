@@ -23,7 +23,7 @@
 							function (self:HistoryWorkspaceController):void
 							{
 								self.parent.removeChild(self);
-								InteractiveMap.sharedMap.isActive = true;
+								InteractiveMap.sharedMap.activate();
 							}});
 		}
 
