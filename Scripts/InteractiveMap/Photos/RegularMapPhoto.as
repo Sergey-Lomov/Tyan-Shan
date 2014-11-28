@@ -7,7 +7,7 @@
 		
 		
 		public function RegularMapPhoto() {
-			// constructor code
+			this.photosDirectory = "Images/Map/Photos/"
 		}
 	}
 	

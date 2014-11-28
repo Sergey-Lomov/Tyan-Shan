@@ -9,6 +9,7 @@
 
 		protected var tracerPresentationSpeed:Number = 0.5;
 		protected var tracer:MovieClip;
+		protected var photosDirectory:String;
 		
 		private var tracerTween:TweenMax = null;
 
@@ -31,7 +32,7 @@
 		
 		private function showPhoto(e:MouseEvent) {
 			var globalGalery:GlobalGalery = new GlobalGalery();
-			globalGalery.picturesPaths = ["Images/Map/" + this.name + ".jpg"];
+			globalGalery.picturesPaths = [photosDirectory + this.name + ".jpg"];
 			globalGalery.picturesTitles = [""];
 			stage.addChild(globalGalery);
 		}

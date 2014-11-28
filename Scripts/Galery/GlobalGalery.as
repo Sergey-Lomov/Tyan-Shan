@@ -103,6 +103,11 @@
 					{
 						self.parent.removeChild(self);
 					}});
+			TweenMax.to(fogging, showHideDuration, {alpha : 0, onCompleteParams:[fogging], onComplete:
+				function (fogging:MovieClip):void
+				{
+					fogging.parent.removeChild(fogging);
+				}});
 		}
 
 		private function setupToStage(e:Event)
@@ -209,6 +214,15 @@
 			right.scaleX =  -  compensativeScaleX;
 			right.scaleY = compensativeScaleY;
 			this.addChild(right);
+
+			this.removeChild(fogging);
+			stage.addChild(fogging);
+			stage.setChildIndex(fogging, stage.numChildren - 2);
+			fogging.x = fogging.y = 0;
+			fogging.width = stage.stageWidth;
+			fogging.height = stage.stageHeight;
+			fogging.alpha = 0;
+			TweenMax.to(fogging, showHideDuration, {alpha : 1});
 
 			TweenMax.fromTo(this, showHideDuration, {scaleX : 0}, {scaleX : this.scaleX});
 			TweenMax.fromTo(this, showHideDuration, {scaleY : 0}, {scaleY : this.scaleY, onCompleteParams:[this], onComplete:

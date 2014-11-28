@@ -34,6 +34,15 @@
 			this.width = 0;
 			this.height = 0;
 
+			this.removeChild(fogging);
+			stage.addChild(fogging);
+			stage.setChildIndex(fogging, stage.numChildren - 2);
+			fogging.x = fogging.y = 0;
+			fogging.width = stage.stageWidth;
+			fogging.height = stage.stageHeight;
+			fogging.alpha = 0;
+			
+			TweenMax.to(fogging, animationDuration, {alpha : 1});
 			TweenMax.to(this, animationDuration, {width : fullWidth});
 			TweenMax.to(this, animationDuration, {height : fullHeight});
 		}
@@ -47,6 +56,11 @@
 				function (self:ReferencePanel):void
 				{
 					self.parent.removeChild(self);
+				}});
+			TweenMax.to(fogging, animationDuration, {alpha : 0, onCompleteParams:[fogging], onComplete:
+				function (fogging:MovieClip):void
+				{
+					fogging.parent.removeChild(fogging);
 				}});
 	
 		}
