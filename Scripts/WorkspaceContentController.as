@@ -16,7 +16,8 @@
 		
 		public function WorkspaceContentController ()
 		{
-			sectionsNames.push("introduction", "contentPage", "membersDosiers", "adventure");
+			sectionsNames.push("contentPage", "introduction", "membersDosiers", "adventure", "conclusions");
+			this.gotoAndStop("Introduction");
 			currentSection = introduction;
 			introduction.workspaceContent = this;
 		}
@@ -57,7 +58,10 @@
 		
 		public function showConclusions ()
 		{
-			
+			this.gotoAndStop("Conclusions");
+			currentSection = conclusions;
+			conclusions.gotoAndStop(1);
+			this.updateButtons();
 		}
 		
 		public function showSettingsPage ()
