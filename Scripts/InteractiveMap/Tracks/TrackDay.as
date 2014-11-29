@@ -31,6 +31,8 @@
 			if (currParent != null)
 				track = MainTrack(currParent);
 
+			hint = MovieClip(this.getChildByName("hintClip"));
+			//ObjectsStore.shareStore.unzoomableClips.push(hint);
 			this.addEventListener(MouseEvent.CLICK, changeState);
 		}
 			

@@ -4,13 +4,20 @@
 	import flash.events.MouseEvent;
 	import flash.events.Event;
 	import com.greensock.*;
+	import flash.display.Stage;
 
 	public class HistoryWorkspaceController extends MovieClip 
 	{
-		const mapShowingDuration:Number = 1.0;
+		public static var sharedHistoryWorkspace:HistoryWorkspaceController = null;
+		
+		private const mapShowingDuration:Number = 1.0;
+		private var globalStage:Stage;
 		
 		public function HistoryWorkspaceController () 
 		{
+			if (sharedHistoryWorkspace == null)
+				sharedHistoryWorkspace = this;
+			
 			workspaceBottomMenu.workspaceContent = workspaceContent;
 			workspaceContent.workspaceBottomMenu = workspaceBottomMenu;
 			workspaceContent.historyWorkspace = this;
@@ -18,13 +25,21 @@
 
 		public function showMap ()
 		{
+			InteractiveMap.sharedMap.activate();
+			globalStage = stage;
 			var finishY:Number = -(this.height * this.scaleY);
 			TweenMax.to(this, mapShowingDuration, {y : finishY, onCompleteParams:[this], onComplete:
 							function (self:HistoryWorkspaceController):void
 							{
 								self.parent.removeChild(self);
-								InteractiveMap.sharedMap.activate();
 							}});
+		}
+		
+		public function presentSelf ()
+		{
+			globalStage.addChild(this);
+			this.y = -(this.height * this.scaleY);
+			TweenMax.to(this, mapShowingDuration, {y : stage.stageHeight / 2});
 		}
 
 		private function hideSelf() 

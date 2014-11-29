@@ -30,6 +30,8 @@
 			
 			hint.alpha = 0;
 			this.removeChild(hint);
+			
+			ObjectsStore.shareStore.unzoomableClips.push(this);
 		}
 		
 		public function initPrsentationTimeline () {

@@ -9,14 +9,18 @@
 
 		protected var tracerPresentationSpeed:Number = 0.5;
 		protected var tracer:MovieClip;
+		protected var main:MovieClip;
 		protected var photosDirectory:String;
 		
 		private var tracerTween:TweenMax = null;
 
 		public function MapPhoto() {
-			this.addEventListener(MouseEvent.MOUSE_OVER, showTracer);
-			this.addEventListener(MouseEvent.MOUSE_OUT, hideTracer);
-			this.addEventListener(MouseEvent.CLICK, showPhoto);
+			ObjectsStore.shareStore.unzoomableClips.push(this);
+			
+			main = MovieClip(this.getChildByName("mainClip"));
+			main.addEventListener(MouseEvent.MOUSE_OVER, showTracer);
+			main.addEventListener(MouseEvent.MOUSE_OUT, hideTracer);
+			main.addEventListener(MouseEvent.CLICK, showPhoto);
 			
 			tracer = MovieClip(this.getChildByName("tracerClip"));
 			tracer.gotoAndStop(0);
@@ -24,8 +28,8 @@
 									   onCompleteParams:[this], onComplete:
 							function (self:MapPhoto):void
 							{
-								var mousePoint:Point = self.localToGlobal(new Point(self.mouseX,self.mouseY));
-								if (!self.hitTestPoint(mousePoint.x,mousePoint.y,true))
+								var mousePoint:Point = self.main.localToGlobal(new Point(self.mouseX,self.mouseY));
+								if (!self.main.hitTestPoint(mousePoint.x,mousePoint.y,true))
 									tracerTween.reverse();
 							}});
 		}
@@ -35,6 +39,8 @@
 			globalGalery.picturesPaths = [photosDirectory + this.name + ".jpg"];
 			globalGalery.picturesTitles = [""];
 			stage.addChild(globalGalery);
+			
+			this.hideTracer(null);
 		}
 		
 		private function showTracer (e:MouseEvent) {
